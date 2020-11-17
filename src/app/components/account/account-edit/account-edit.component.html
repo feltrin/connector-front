@@ -1,0 +1,7 @@
+<mat-card>
+    <mat-card-title>Authorization</mat-card-title>
+    <form>
+        <json-schema-form loadExternalAssets="true" [schema]="model?.model?.schema" [layout]="model?.model?.layout" [data]="data.config?.outputSchema" framework="material-design"
+            (onSubmit)="submitForm($event)"></json-schema-form>
+    </form>
+</mat-card>

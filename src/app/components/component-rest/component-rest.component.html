@@ -1,0 +1,59 @@
+<mat-card>
+    <mat-card-title>PETSTORE</mat-card-title>
+    <form #formcontrol="ngForm">
+        <mat-form-field>
+            <mat-label>Ação</mat-label>
+            <mat-select [(ngModel)]="selectedAction" (selectionChange)="actionChange(selectedAction)" name="action">
+                <mat-option *ngFor="let action of actions" [value]="action.id">
+                    {{action.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field> 
+
+        <mat-form-field [hidden]="!selectedAction" >
+            <input matInput [(ngModel)]="data.label" placeholder="Name" name="name" required > 
+        </mat-form-field>
+        
+        <div [hidden]="!data?.configSchema?.allowCustomEnv">
+            <mat-form-field >
+                <mat-label>Ambiente</mat-label>
+                <mat-select [(ngModel)]="selectedEnv" name="env">
+                    <mat-option *ngFor="let env of envs" [value]="env.id">
+                        {{env.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button mat-icon-button color="primary" (click)="addEnvironment()">
+                <mat-icon>domain</mat-icon>
+            </button>  
+        </div>
+        <div [hidden]="!data?.configSchema?.allowedAuthTypes || this.data?.configSchema?.allowedAuthTypes == 0">
+            <mat-form-field >
+                <mat-label>Account</mat-label>
+                <mat-select [(ngModel)]="selectedAccount" name="account">
+                    <mat-option *ngFor="let account of accounts" [value]="account.id">
+                        {{account.config.outputSchema.label}}
+                    </mat-option>
+                </mat-select> 
+            </mat-form-field>
+            <button mat-icon-button color="primary" (click)="addAccount()">
+                <mat-icon>person_add</mat-icon>
+            </button>  
+        </div>
+                
+        <json-schema-form loadExternalAssets="true"  
+        [schema]="data?.configSchema?.inputSchema?.schema" 
+        [layout]="data?.configSchema?.inputSchema?.layout" 
+        [data]="data?.configurations"
+        [widgets]="yourWidgets"
+        (onChanges)="yourOnChangesFn($event)" 
+        (isValid)="yourIsValidFn($event)"
+        framework="material-design"></json-schema-form>
+    </form>
+    <button mat-raised-button (click)="save()" [disabled]="!formcontrol.form.valid || !isDisabled" color="primary" >
+        Salvar
+    </button> 
+    <button mat-raised-button (click)="cancel()">
+        Cancelar 
+    </button>
+</mat-card>

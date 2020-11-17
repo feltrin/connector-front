@@ -1,0 +1,29 @@
+<mat-card>
+    <mat-card-title>Authorization</mat-card-title>
+    <form #formcontrol="ngForm">
+        <mat-form-field>
+            <mat-label>Type</mat-label>
+            <mat-select [(ngModel)]="selectedValue" name="model" required>
+            <mat-option *ngFor="let model of models" [value]="model">
+                {{model.type}}
+            </mat-option>
+            </mat-select>
+        </mat-form-field>
+        
+        <json-schema-form loadExternalAssets="true" 
+        [schema]="selectedValue?.model?.schema" 
+        [layout]="selectedValue?.model?.layout" 
+        framework="material-design"
+        [widgets]="yourWidgets"
+        (onChanges)="yourOnChangesFn($event)" 
+        (isValid)="yourIsValidFn($event)"
+        >
+    </json-schema-form>
+    </form>
+    <button mat-raised-button (click)="save()" [disabled]="!formcontrol.form.valid || !isDisabled" color="primary" >
+        Salvar
+    </button> 
+    <button mat-raised-button (click)="cancel()">
+        Cancelar 
+    </button>
+</mat-card>

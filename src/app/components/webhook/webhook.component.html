@@ -1,0 +1,14 @@
+<mat-card>
+    <mat-card-title>Webhook</mat-card-title>
+    <form #formcontrol="ngForm">
+        <mat-form-field >
+            <input matInput [(ngModel)]="this.activity?.configurations.url" placeholder="Webhook URL" name="url" readonly > 
+        </mat-form-field>
+    </form>
+    <button mat-raised-button (click)="save()" [disabled]="!formcontrol.form.valid" color="primary" >
+        Salvar
+    </button> 
+    <button mat-raised-button (click)="cancel()">
+        Cancelar 
+    </button>
+</mat-card>

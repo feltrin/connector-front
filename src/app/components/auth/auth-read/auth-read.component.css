@@ -1,0 +1,13 @@
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.example-card {
+    width: 100%;
+}
+
+.list-item {
+    padding-top: 2.2rem;
+}
+
+

@@ -1,0 +1,19 @@
+<mat-card>
+    <mat-card-title>Linkedin</mat-card-title>
+    <form #formcontrol="ngForm">
+            <mat-form-field >
+            <input matInput [(ngModel)]="env.name" placeholder="Name" name="name" required > 
+        </mat-form-field>
+
+        <mat-form-field >
+            <input matInput [(ngModel)]="env.baseURL" placeholder="Base URL" name="baseURL" required > 
+        </mat-form-field>
+      
+    </form>
+    <button mat-raised-button (click)="save()" [disabled]="!formcontrol.form.valid" color="primary" >
+        Salvar
+    </button> 
+    <button mat-raised-button (click)="cancel()">
+        Cancelar 
+    </button>
+</mat-card>
