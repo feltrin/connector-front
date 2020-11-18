@@ -49,6 +49,7 @@ import { FlowReadComponent } from './components/flow/flow-read/flow-read.compone
 import { ComponentRestComponent } from './components/component-rest/component-rest.component';
 import { WebhookComponent } from './components/webhook/webhook.component';
 import { EnvironmentComponent } from './components/environment/environment.component';
+import { ClockComponent } from './components/clock/clock.component';
 
 
 registerLocaleData(localePt)
@@ -71,7 +72,8 @@ registerLocaleData(localePt)
     FlowReadComponent,
     ComponentRestComponent,
     WebhookComponent,
-    EnvironmentComponent
+    EnvironmentComponent,
+    ClockComponent
   ],
   imports: [
     BrowserModule,

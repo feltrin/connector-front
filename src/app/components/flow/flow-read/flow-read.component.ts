@@ -1,10 +1,11 @@
+import { ClockComponent } from './../../clock/clock.component';
 import { WebhookComponent } from './../../webhook/webhook.component';
 import { IntegrationService } from './../../diagram/integration.service';
 import { Activity } from './../flow.model';
 import { ComponentRestComponent } from './../../component-rest/component-rest.component';
-import { Diagram, DiagramResponse } from './../../diagram/diagram.model';
+import { DiagramResponse } from './../../diagram/diagram.model';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DiagramService } from './../../diagram/diagram.service';
+
 
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -32,13 +33,21 @@ export class FlowReadComponent implements OnInit {
      
       if(Object.keys(diagram.flow.activities).length === 0){
 
-        let dialogRef = this.dialog.open(WebhookComponent, { 
+        let dialogRef = this.dialog.open(ClockComponent, { 
           data: this.diagram,//{diagramId: this.diagram.id, activity:activity},
           maxHeight: '95vh',
           minWidth: '500px',
           width: '25vw'
-
         });
+
+        //WEBHOOK
+        // let dialogRef = this.dialog.open(WebhookComponent, { 
+        //   data: this.diagram,//{diagramId: this.diagram.id, activity:activity},
+        //   maxHeight: '95vh',
+        //   minWidth: '500px',
+        //   width: '25vw'
+
+        // });
 
         dialogRef.afterClosed().subscribe(result => {
           if(result){
@@ -99,6 +108,24 @@ export class FlowReadComponent implements OnInit {
           }
         });
         break;
+
+        case "333":
+          let dialogRef2 = this.dialog.open(ClockComponent, { 
+            data: this.diagram,
+            maxHeight: '95vh',
+            minWidth: '300px',
+            width: '25vw'
+  
+          });
+  
+          dialogRef2.afterClosed().subscribe(result => {
+            if(result){
+              this.diagram.flow.activities["start"] = result;
+              console.log(result)
+              this.lastActivity = "start"
+            }
+          });
+          break;
 
       case "8d52b588-1ff1-42f2-8e1e-2be746ae82ab":
         this.dialog.open(ComponentRestComponent, { 
