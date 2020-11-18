@@ -28,7 +28,7 @@ export class ClockComponent implements OnInit {
   actionsDetails: ActionResponse[] = [{
     id: "XXXXXXXX-bcd5-48c4-8fac-a1bb8e511ee5",
     name: 'Repeat',
-    type: "REPEAT",
+    type: "QUARTZ",
     model: { 
       "inputSchema": {
         "schema": {
@@ -86,7 +86,7 @@ export class ClockComponent implements OnInit {
     if(!this.activity){
       var id = Math.random().toString(36).substring(2, 15) ;
       this.activity = {
-        id: id, componentId: "333", label:"Clock", type:"CLOCK" ,
+        id: id, componentId: "333", label:"Quartz", type:"QUARTZ" ,
         connections: {next:[], previous:[]}
       }
     }else{
