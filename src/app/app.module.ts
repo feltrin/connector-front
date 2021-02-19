@@ -17,10 +17,9 @@ import { ForDirective } from './directives/for.directive';
 
 import { HttpClientModule } from '@angular/common/http';
 
-import { FormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input';
-
 
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -50,6 +49,9 @@ import { ComponentRestComponent } from './components/component-rest/component-re
 import { WebhookComponent } from './components/webhook/webhook.component';
 import { EnvironmentComponent } from './components/environment/environment.component';
 import { ClockComponent } from './components/clock/clock.component';
+// import { ComponentActionModelComponent } from './components/component-action-model/component-action-model.component';
+import { FormlyModule } from '@ngx-formly/core';
+import { FormlyMaterialModule } from '@ngx-formly/material';
 
 
 registerLocaleData(localePt)
@@ -73,7 +75,8 @@ registerLocaleData(localePt)
     ComponentRestComponent,
     WebhookComponent,
     EnvironmentComponent,
-    ClockComponent
+    ClockComponent,
+    // ComponentActionModelComponent
   ],
   imports: [
     BrowserModule,
@@ -97,7 +100,10 @@ registerLocaleData(localePt)
     MatSelectModule,
     MatSlideToggleModule,
     MatMenuModule,
-    MatIconModule
+    MatIconModule,
+    ReactiveFormsModule,
+    FormlyModule.forRoot({ extras: { lazyRender: true } }),
+    FormlyMaterialModule
   ],
   providers: [{
     provide: LOCALE_ID,

@@ -1,3 +1,6 @@
+import { FormlyFieldConfig } from '@ngx-formly/core';
+import { FormlyFormOptions } from '@ngx-formly/core';
+import { FormGroup } from '@angular/forms';
 import { NoneComponent } from 'angular6-json-schema-form';
 import { AccountService } from './../account.service';
 import { AuthModelService } from './../auth-model.service';
@@ -12,6 +15,12 @@ import { AuthModel } from '../authModel.model';
   styleUrls: ['./auth-create.component.css']
 })
 export class AuthCreateComponent implements OnInit {
+
+  form = new FormGroup({});
+  model: any = {};
+  options: FormlyFormOptions = {};
+  fields: FormlyFieldConfig[];
+
   yourWidgets = {
     submit: NoneComponent,  
   }
@@ -33,22 +42,25 @@ export class AuthCreateComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.data){
-      this.modelService.readByType(this.data.types).subscribe(models=> {
-        this.models = models.items;
+      this.modelService.readByType(this.data.types).subscribe(data=> {
+        this.models = data.items;
       });
     }else{ 
       this.modelService.read().subscribe(models=> {
+        console.log("modelService")
           this.models = models.items;
         });
     }
   }
 
   save(): void{
-    this.account.config.outputSchema =  this.inputData;
+    alert(JSON.stringify(this.model));
+
+    this.account.config.outputSchema =  this.model;
     this.account.modelId = this.selectedValue.id;
     this.account.authType = this.selectedValue.type;
     this.account.active = true;
-    this.account.componentId = this.data.componentId;
+    this.account.componentId = "1824db74-52c2-400f-9be7-e8b450cf153f"; //this.data.componentId;
     const that = this;
     var popwin = null;
 
@@ -73,24 +85,17 @@ export class AuthCreateComponent implements OnInit {
     if(this.selectedValue.type === "OAUTH2_CODE" ||
       this.selectedValue.type === "OAUTH2_IMPLICIT"){
 
-      var url = `${this.oauthUrl}?oauth_type=${this.selectedValue.type}&client_id=${this.inputData.client_id}&scope=${this.inputData.scope}&provider=${this.inputData.authURL}`
+      var url = `${this.oauthUrl}?oauth_type=${this.selectedValue.type}&client_id=${this.model.client_id}&scope=${this.model.scope}&provider=${this.model.authURL}`
       window.addEventListener('message', gMsg, false);
       popwin = window.open(url,'_black',  "toolbar=no,scrollbars=yes,status=yes,resizable=yes,location=no,menuBar=no,modal=yes");
     }else{
       console.log("DEFAULT!!");
       that.accountService.create(that.account).subscribe(account => {
        console.log("CRIADO SERVER");
+       console.log(account);
        that.dialogRef.close(account);
       })
     }
-  }
-
-  yourOnChangesFn(inputData): void{
-    this.inputData = inputData;
-  }
-
-  yourIsValidFn(data): void{
-    this.isDisabled = data;
   }
 
   cancel(): void{
