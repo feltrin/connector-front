@@ -4,11 +4,12 @@ import { DiagramCrudComponent } from './views/diagram-crud/diagram-crud.componen
 import { AuthCrudComponent } from './views/auth-crud/auth-crud.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+// import { ComponentActionModelComponent } from './components/component-action-model/component-action-model.component';
 
 const routes: Routes = [
   {
     path: "",
-    component: DiagramCrudComponent
+    component: AuthCrudComponent
   },
   {
     path: "diagrams",
@@ -21,7 +22,11 @@ const routes: Routes = [
   {
     path: "accounts",
     component: AuthCrudComponent
-  }
+  },
+  // {
+  //   path: "actionModel",
+  //   component: ComponentActionModelComponent
+  // }
 ];
 
 @NgModule({
