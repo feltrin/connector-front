@@ -9,6 +9,10 @@
             </mat-option> 
             </mat-select>
         </mat-form-field>
+
+        <mat-form-field [hidden]="!selectedValue" >
+            <input matInput [(ngModel)]="name" placeholder="Accoutn name" name="name" required > 
+        </mat-form-field>
         
         <formly-form [model]="model" [fields]="selectedValue?.model?.inputSchema" [options]="options" [form]="form"></formly-form>
         <!-- <button type="submit" class="btn btn-primary submit-button" [disabled]="!form.valid">Submit</button> -->

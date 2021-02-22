@@ -16,6 +16,7 @@ import { AuthModel } from '../authModel.model';
 })
 export class AuthCreateComponent implements OnInit {
 
+  name: string;
   form = new FormGroup({});
   model: any = {};
   options: FormlyFormOptions = {};
@@ -56,10 +57,10 @@ export class AuthCreateComponent implements OnInit {
   save(): void{
     alert(JSON.stringify(this.model));
 
+    this.account.name = this.name;
     this.account.config.outputSchema =  this.model;
     this.account.modelId = this.selectedValue.id;
     this.account.authType = this.selectedValue.type;
-    this.account.active = true;
     this.account.componentId = "1824db74-52c2-400f-9be7-e8b450cf153f"; //this.data.componentId;
     const that = this;
     var popwin = null;

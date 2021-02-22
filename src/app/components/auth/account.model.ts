@@ -5,6 +5,7 @@ export interface AccountAPI{
 
 export interface Account{
     id?: string
+    name?:string
     modelId?: string
     authType?: string
     componentId?: string
