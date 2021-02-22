@@ -1,3 +1,5 @@
+import { PanelWrapperComponent } from './components/template/wrapper/panel-wrapper.component';
+import { RepeatTypeComponent } from './components/template/repeat/repeat-section.type';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
 
@@ -76,7 +78,8 @@ registerLocaleData(localePt)
     WebhookComponent,
     EnvironmentComponent,
     ClockComponent,
-    // ComponentActionModelComponent
+    // ComponentActionModelComponent,
+    RepeatTypeComponent, PanelWrapperComponent
   ],
   imports: [
     BrowserModule,
@@ -102,7 +105,10 @@ registerLocaleData(localePt)
     MatMenuModule,
     MatIconModule,
     ReactiveFormsModule,
-    FormlyModule.forRoot({ extras: { lazyRender: true } }),
+    FormlyModule.forRoot({ extras: { lazyRender: true }, 
+      types: [{ name: "repeat", component: RepeatTypeComponent }],
+      wrappers: [{ name: "expansion-panel", component: PanelWrapperComponent }]
+    }),
     FormlyMaterialModule
   ],
   providers: [{
